@@ -27,10 +27,6 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable("id") Long id) {
         Optional<Student> student = studentService.findById(id);
-//        if (student.isPresent()) {
-//            return new ResponseEntity<>(student.get(), HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return student.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
